@@ -1,3 +1,4 @@
+const fs = require('fs');
 require('dotenv').config();
 
 var Twitter = require('twitter-node-client').Twitter;
@@ -8,14 +9,33 @@ var twitter = new Twitter({
   "accessTokenSecret": process.env.ACCESS_TOKEN_SECRET,
 });
 
-console.log(process.env);
-
 var error = function (err, response, body) {
   console.log('ERROR [%s]', err, body);
 };
 
 var success = function (data) {
-  console.log('Data [%s]', data);
+  // console.log('Data [%s]', data);
+
+  let statuses = JSON.parse(data);
+
+  let gifs = [];
+  for (var i = 0; i < statuses.length; i++) {
+    let s = statuses[i];
+
+    if (
+        ('extended_entities' in s) &&
+        (s.extended_entities.media[0].type == "animated_gif")) {
+      
+      gifs.push(s.extended_entities.media[0].video_info.variants[0].url);
+    }
+  }
+
+  fs.writeFile('/tmp/gifs.json', JSON.stringify(gifs), function(err) {
+    if (err) {
+        return console.log(err);
+    }
+  }); 
+
 };
 
-twitter.getUserTimeline({ screen_name: 'etiennejcb', count: '10'}, error, success);
+twitter.getUserTimeline({ screen_name: 'etiennejcb', count: '100'}, error, success);
