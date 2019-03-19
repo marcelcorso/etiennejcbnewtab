@@ -38,4 +38,16 @@ var success = function (data) {
 
 };
 
-twitter.getUserTimeline({ screen_name: 'etiennejcb', count: '100'}, error, success);
+// twitter.getUserTimeline({ screen_name: 'etiennejcb', count: '100'}, error, success);
+
+
+const Koa = require('koa');
+const app = new Koa();
+
+app.use(async ctx => {
+  twitter.getUserTimeline({ screen_name: 'etiennejcb', count: '100'}, error, success);
+  ctx.body = 'Hello World';
+});
+
+app.listen(3000);
+
