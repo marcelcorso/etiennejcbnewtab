@@ -1,0 +1,25 @@
+{
+  "name": "etiennejcbnewtab",
+  "version": "0.0.1",
+  "description": "etiennejcb newtab server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "twitter-node-client": "^0.0.6",
+    "koa": "^2.7.0"
+  },
+  "engines": {
+    "node": "10.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manuelkiessling/nodebeginnerbook-manuscript"
+  },
+  "keywords": [
+    "node"
+  ],
+  "license": "CC-BY-NC-SA-3.0"
+}
